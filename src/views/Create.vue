@@ -21,10 +21,10 @@
       <button v-on:click="createBeer">Create Event</button>
     </div>
 
-    <div v-for="beer in beers" :key="beer.id">
+    <!-- <div v-for="beer in beers" :key="beer.id">
       <h4>{{ beer.name }}</h4>
-      <!-- <p>{{ beer.id }}</p> -->
-    </div>
+      <p>{{ beer.id }}</p>
+    </div> -->
   </div>
 </template>
 
@@ -45,7 +45,10 @@ export default {
       errors: [],
     };
   },
-  created: function() {
+  // created: function() {
+  //   this.indexBeers();
+  // },
+  mounted: function() {
     this.indexBeers();
   },
   methods: {

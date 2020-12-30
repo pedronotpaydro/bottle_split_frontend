@@ -5,6 +5,7 @@ import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Create from "../views/Create.vue";
+import EventsAll from "../views/EventsAll.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,7 @@ const routes = [
   { path: "/login", name: "login", component: Login },
   { path: "/logout", name: "logout", component: Logout },
   { path: "/create", name: "create", component: Create },
+  { path: "/events", name: "events-all", component: EventsAll },
 ];
 
 const router = new VueRouter({

@@ -1,18 +1,20 @@
 <template>
   <div id="app">
     <div id="nav">
-      <div class="alert alert-success" v-if="flashMessage" v-on:click="flashMessage = ''">
-        {{ flashMessage }}
-      </div>
       <router-link to="/">Home</router-link>
       |
       <router-link to="/create">Create</router-link>
+      |
+      <router-link v-if="isLoggedin()" to="/events">All Events</router-link>
       |
       <router-link v-if="!isLoggedin()" to="/signup">Signup</router-link>
       |
       <router-link v-if="!isLoggedin()" to="/login">Login</router-link>
       |
       <router-link v-if="isLoggedin()" to="/logout">Logout</router-link>
+    </div>
+    <div class="alert alert-success" v-if="flashMessage" v-on:click="flashMessage = ''">
+      {{ flashMessage }}
     </div>
 
     <router-view />
@@ -45,7 +47,7 @@
 export default {
   data: function() {
     return {
-      flashMessage: "WHY NO WORK?",
+      flashMessage: "",
     };
   },
   methods: {

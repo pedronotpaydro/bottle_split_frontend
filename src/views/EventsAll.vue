@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Upcoming Events</h1>
+    <h1>All Events</h1>
 
     <div v-for="event in events" :key="event.id">
       <h2>{{ event.name }}</h2>
@@ -12,7 +12,7 @@
     </div>
     <dialog id="event-details">
       <form method="dialog">
-        <h1>Event Info</h1>
+        <h1>Product Info</h1>
         <p>
           Name:
           <input type="text" v-model="currentEvent.name" />
@@ -26,16 +26,14 @@
           <input type="text" v-model="currentEvent.beer" />
         </p>
         <p>
-          <!-- Description:
-          <input type="text" v-model="currentEvent.beer.beer_description" />
-        </p> -->
+          Description:
+          <input type="text" v-model="currentEvent.beer_description" />
         </p>
-
         <div v-if="$parent.getUserId() == currentEvent.user_id">
           <button v-on:click="updateEvent(currentEvent)">Update</button>
           <button v-on:click="destroyEvent(currentEvent)">Delete</button>
+          <button>Close</button>
         </div>
-        <button>Close</button>
       </form>
     </dialog>
   </div>
@@ -55,12 +53,12 @@ export default {
       errors: [],
     };
   },
-  mounted: function() {
+  created: function() {
     this.indexEvents();
   },
   methods: {
     indexEvents: function() {
-      axios.get("/api/events?active=live").then(response => {
+      axios.get("/api/events").then(response => {
         this.events = response.data;
         console.log("All Events", this.events);
       });
@@ -83,7 +81,7 @@ export default {
         date: this.newEventDate,
       };
       axios.patch("api/events/" + event.id, params).then(response => {
-        console.log("Event Updated", response.data);
+        console.log("Event Updated", event.id, response.data);
       });
     },
   },
