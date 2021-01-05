@@ -16,7 +16,7 @@
       Event Location:
       <input type="text" v-model="newEventLocation" />
       Event Date:
-      <input type="text" v-model="newEventDate" />
+      <Datepicker format="YYYY-MM-DD h:i:s" width="100%" v-model="newEventDate" />
 
       <button v-on:click="createBeer">Create Event</button>
     </div>
@@ -30,6 +30,7 @@
 
 <script>
 import axios from "axios";
+import Datepicker from "vuejs-datetimepicker";
 
 export default {
   data: function() {
@@ -44,6 +45,9 @@ export default {
       newEventDate: "",
       errors: [],
     };
+  },
+  components: {
+    Datepicker,
   },
   // created: function() {
   //   this.indexBeers();

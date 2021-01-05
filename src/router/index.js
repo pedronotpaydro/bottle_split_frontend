@@ -6,6 +6,7 @@ import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Create from "../views/Create.vue";
 import EventsAll from "../views/EventsAll.vue";
+import MyEvents from "../views/MyEvents.vue";
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,7 @@ const routes = [
   { path: "/logout", name: "logout", component: Logout },
   { path: "/create", name: "create", component: Create },
   { path: "/events", name: "events-all", component: EventsAll },
+  { path: "/myevents", name: "events-show", component: MyEvents },
 ];
 
 const router = new VueRouter({

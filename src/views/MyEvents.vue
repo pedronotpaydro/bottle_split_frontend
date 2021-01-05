@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>All Events</h1>
+    <h1>My Events</h1>
 
     <div v-for="event in events" :key="event.id">
       <h2>{{ event.name }}</h2>
@@ -12,7 +12,7 @@
     </div>
     <dialog id="event-details">
       <form method="dialog">
-        <h1>Product Info</h1>
+        <h1>Event Info</h1>
         <p>
           Name:
           <input type="text" v-model="currentEvent.name" />
@@ -32,8 +32,6 @@
         <div v-if="$parent.getUserId() == currentEvent.user_id">
           <button v-on:click="updateEvent(currentEvent)">Update</button>
           <button v-on:click="destroyEvent(currentEvent)">Delete</button>
-        </div>
-        <div>
           <button>Close</button>
         </div>
       </form>
@@ -55,12 +53,12 @@ export default {
       errors: [],
     };
   },
-  created: function() {
+  mounted: function() {
     this.indexEvents();
   },
   methods: {
     indexEvents: function() {
-      axios.get("/api/events").then(response => {
+      axios.get("/api/events?my_events=this_user").then(response => {
         this.events = response.data;
         console.log("All Events", this.events);
       });

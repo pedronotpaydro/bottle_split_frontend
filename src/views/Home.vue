@@ -26,16 +26,17 @@
           <input type="text" v-model="currentEvent.beer" />
         </p>
         <p>
-          <!-- Description:
-          <input type="text" v-model="currentEvent.beer.beer_description" />
-        </p> -->
+          Description:
+          <input type="text" v-model="currentEvent.beer_description" />
         </p>
 
         <div v-if="$parent.getUserId() == currentEvent.user_id">
           <button v-on:click="updateEvent(currentEvent)">Update</button>
           <button v-on:click="destroyEvent(currentEvent)">Delete</button>
         </div>
-        <button>Close</button>
+        <div>
+          <button>Close</button>
+        </div>
       </form>
     </dialog>
   </div>

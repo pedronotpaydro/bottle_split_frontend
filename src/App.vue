@@ -7,6 +7,9 @@
       |
       <router-link v-if="isLoggedin()" to="/events">All Events</router-link>
       |
+
+      <router-link v-if="isLoggedin()" to="/myevents">My Events</router-link>
+      |
       <router-link v-if="!isLoggedin()" to="/signup">Signup</router-link>
       |
       <router-link v-if="!isLoggedin()" to="/login">Login</router-link>
