@@ -1,7 +1,38 @@
 <template>
   <div class="create">
-    <!-- <h1>List of beers</h1> -->
-    <h2>Create New Event</h2>
+    <!-- Section Specials -->
+    <section id="specials">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="specials_wrap">
+              <div class="row">
+                <div class="col-lg-6 col-md-12 no-padding align-self-center">
+                  <div class="specials_content">
+                    <h2>Specials</h2>
+                    <hr class="dotted_divider_left_red" />
+                    <p>
+                      Chef Manue loves experimenting with flavours and ingredients but sometimes she loves to follow
+                      strictly recipes from French pastry chefs.
+                    </p>
+
+                    <a href="specials.html" class="btn btn-link-bibbona">
+                      More
+                      <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12 no-padding">
+                  <div class="specials_img"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.Section Specials -->
+    <!-- <h2>Create New Event</h2>
     <div>
       Bottle Name:
       <input type="text" v-model="newBeerName" />
@@ -19,11 +50,6 @@
       <Datepicker format="YYYY-MM-DD h:i:s" width="100%" v-model="newEventDate" />
 
       <button v-on:click="createBeer">Create Event</button>
-    </div>
-
-    <!-- <div v-for="beer in beers" :key="beer.id">
-      <h4>{{ beer.name }}</h4>
-      <p>{{ beer.id }}</p>
     </div> -->
   </div>
 </template>
@@ -47,6 +73,7 @@ export default {
     };
   },
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     Datepicker,
   },
   // created: function() {
