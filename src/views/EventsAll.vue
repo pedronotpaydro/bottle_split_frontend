@@ -1,567 +1,97 @@
 <template>
   <div class="eventsall">
-    <section id="menu">
+    <!-- Event Header -->
+    <header id="event_header">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="menu_wrap">
-              <!-- Title -->
-              <div class="menu_title">
-                <h2>Upcoming Events</h2>
-                <hr class="dotted_divider_center_red" />
+          <div class="col-md-8 offset-md-2">
+            <div class="align-self-center">
+              <div class="logo-badge">
+                <img
+                  src="cafe-bibbona/imgs/logo-badge/cafe-bibbona-badge.svg"
+                  width="300"
+                  height="115"
+                  class="img-fluid mx-auto d-block"
+                  alt="Café Bibbona - Coffee & Bakes"
+                />
               </div>
-              <!-- /.Title -->
+              <h1>All Events</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- /.Event Header -->
+    <!-- Events List -->
+    <section id="events_list">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6" v-for="event in events" :key="event.id">
+            <div class="event_card">
+              <div class="row no-padding">
+                <div class="col-md-12 no-padding">
+                  <div class="card_content">
+                    <h2>{{ event.name }}</h2>
+                    <span>
+                      <small>Hosted by: {{ event.hosted_by }}</small>
+                    </span>
+                    <hr class="dotted_divider_left_red" />
+                    <p>{{ event.beer_description }}</p>
 
-              <!-- Menu Content -->
-              <div class="menu_content">
-                <!-- Menu Filter Navigation -->
-                <div class="row text-center">
-                  <div class="col-lg-12">
-                    <div class="menu-filter-area">
-                      <ul class="menu-filter" id="menu-masonry-sort">
-                        <li class="active"><a href="#" data-target=".macaroons">All</a></li>
-                        <li><a href="#" data-target=".cakes">IPAs</a></li>
-                        <li><a href="#" data-target=".muffins">Stouts</a></li>
-                        <li><a href="#" data-target=".waffles">Sours</a></li>
-                        <!-- <li><a href="#" data-target=".milkshakes">Milshakes</a></li>
-                        <li><a href="#" data-target=".coffee">Coffee</a></li> -->
-                      </ul>
-                    </div>
+                    <a class="btn btn-link-bibbona-sm" v-on:click="showEvent(event)">
+                      More info
+                      <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                  <dialog id="event-details">
+                    <form method="dialog">
+                      <h1>{{ currentEvent.name }}</h1>
+
+                      <p v-if="isLoggedin()">
+                        {{ currentEvent.location }}
+                      </p>
+                      <p v-if="!isLoggedin()">
+                        Log in or signup to see location
+                      </p>
+                      <p v-if="isLoggedin()">
+                        {{ currentEvent.date }}
+                      </p>
+                      <p v-if="!isLoggedin()">
+                        Log in or signup to see date
+                      </p>
+                      <p>
+                        Menu:
+                        {{ currentEvent.beer }}
+                      </p>
+                      <p>{{ currentEvent.beer_description }}></p>
+                      <div v-if="$parent.getUserId() == currentEvent.user_id">
+                        <button v-on:click="updateEvent(currentEvent)">Update</button>
+                        <button v-on:click="destroyEvent(currentEvent)">Delete</button>
+                      </div>
+                      <div>
+                        <button>Close</button>
+                      </div>
+                    </form>
+                  </dialog>
+                </div>
+                <div class="col-md-12 no-padding">
+                  <div class="event_img">
+                    <img
+                      class="img-fluid mx-auto d-block"
+                      src="cafe-bibbona/imgs/events/event-01.jpg"
+                      width="784"
+                      height="600"
+                      alt=""
+                    />
                   </div>
                 </div>
-                <!-- /.Menu Filter Navigation -->
-
-                <!-- Menu Items -->
-                <div class="row">
-                  <div class="menu-items-wrapper col-lg-12">
-                    <div class="menu-items" id="menu-masonry">
-                      <!-- Menu List 01 -->
-                      <!-- Single Menu List -->
-                      <div class="single-menu-list macaroons">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <!-- Menu Item 01 -->
-                            <div class="menu-list-item" v-for="event in events" :key="event.id">
-                              <h5>
-                                {{ event.name }}
-                                <span>
-                                  <small>(Hosted by: {{ event.hosted_by }} )</small>
-                                </span>
-                              </h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    {{ event.beer_description }}
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">
-                                    <a v-on:click="showEvent(event)" class="btn btn-link-bibbona">
-                                      More
-                                      <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i>
-                                    </a>
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 01 -->
-
-                            <!-- Menu Item 02 -->
-
-                            <!-- /. Menu Item 02 -->
-
-                            <!-- Menu Item 03 -->
-
-                            <!-- /. Menu Item 03 -->
-
-                            <!-- Menu Item 04 -->
-
-                            <!-- /. Menu Item 04 -->
-                          </div>
-                          <div class="col-md-6 align-self-center">
-                            <!-- Menu Main List Image -->
-                            <div class="menu-image">
-                              <img
-                                src="cafe-bibbona/imgs/menu/macaroons.png"
-                                width="600"
-                                height="620"
-                                class="img-fluid mx-auto d-block"
-                                alt="Macaroons"
-                              />
-                            </div>
-                            <!-- Menu Main List Image -->
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.Single Menu List -->
-                      <!-- /Menu List 01 -->
-
-                      <!-- Menu List 02 -->
-                      <!-- Single Menu List -->
-                      <div class="single-menu-list cakes">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <!-- Menu Item 01 -->
-                            <div class="menu-list-item">
-                              <h5>Coconut Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 01 -->
-
-                            <!-- Menu Item 02 -->
-                            <div class="menu-list-item">
-                              <h5>French Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 02 -->
-
-                            <!-- Menu Item 03 -->
-                            <div class="menu-list-item">
-                              <h5>Almond Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 03 -->
-
-                            <!-- Menu Item 04 -->
-                            <div class="menu-list-item">
-                              <h5>Chocolate Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 04 -->
-                          </div>
-                          <div class="col-md-6 align-self-center">
-                            <!-- Menu Main List Image -->
-                            <div class="menu-image">
-                              <img
-                                src="cafe-bibbona/imgs/menu/macaroons.png"
-                                width="700"
-                                height="620"
-                                class="img-fluid mx-auto d-block"
-                                alt="Macaroons"
-                              />
-                            </div>
-                            <!-- Menu Main List Image -->
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.Single Menu List -->
-                      <!-- /Menu List 02 -->
-
-                      <!-- Menu List 03 -->
-                      <!-- Single Menu List -->
-                      <div class="single-menu-list muffins">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <!-- Menu Item 01 -->
-                            <div class="menu-list-item">
-                              <h5>Coconut Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 01 -->
-
-                            <!-- Menu Item 02 -->
-                            <div class="menu-list-item">
-                              <h5>French Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 02 -->
-
-                            <!-- Menu Item 03 -->
-                            <div class="menu-list-item">
-                              <h5>Almond Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 03 -->
-
-                            <!-- Menu Item 04 -->
-                            <div class="menu-list-item">
-                              <h5>Chocolate Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 04 -->
-                          </div>
-                          <div class="col-md-6 align-self-center">
-                            <!-- Menu Main List Image -->
-                            <div class="menu-image">
-                              <img
-                                src="cafe-bibbona/imgs/menu/macaroons.png"
-                                width="700"
-                                height="620"
-                                class="img-fluid mx-auto d-block"
-                                alt="Macaroons"
-                              />
-                            </div>
-                            <!-- Menu Main List Image -->
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.Single Menu List -->
-                      <!-- /Menu List 03 -->
-
-                      <!-- Menu List 04 -->
-                      <!-- Single Menu List -->
-                      <div class="single-menu-list waffles">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <!-- Menu Item 01 -->
-                            <div class="menu-list-item">
-                              <h5>Coconut Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 01 -->
-
-                            <!-- Menu Item 02 -->
-                            <div class="menu-list-item">
-                              <h5>French Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 02 -->
-
-                            <!-- Menu Item 03 -->
-                            <div class="menu-list-item">
-                              <h5>Almond Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 03 -->
-
-                            <!-- Menu Item 04 -->
-                            <div class="menu-list-item">
-                              <h5>Chocolate Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 04 -->
-                          </div>
-                          <div class="col-md-6 align-self-center">
-                            <!-- Menu Main List Image -->
-                            <div class="menu-image">
-                              <img
-                                src="cafe-bibbona/imgs/menu/macaroons.png"
-                                width="700"
-                                height="620"
-                                class="img-fluid mx-auto d-block"
-                                alt="Macaroons"
-                              />
-                            </div>
-                            <!-- Menu Main List Image -->
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.Single Menu List -->
-                      <!-- /Menu List 04 -->
-
-                      <!-- Menu List 05 -->
-                      <!-- Single Menu List -->
-                      <div class="single-menu-list milkshakes">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <!-- Menu Item 01 -->
-                            <div class="menu-list-item">
-                              <h5>Coconut Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 01 -->
-
-                            <!-- Menu Item 02 -->
-                            <div class="menu-list-item">
-                              <h5>French Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 02 -->
-
-                            <!-- Menu Item 03 -->
-                            <div class="menu-list-item">
-                              <h5>Almond Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 03 -->
-
-                            <!-- Menu Item 04 -->
-                            <div class="menu-list-item">
-                              <h5>Chocolate Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 04 -->
-                          </div>
-                          <div class="col-md-6 align-self-center">
-                            <!-- Menu Main List Image -->
-                            <div class="menu-image">
-                              <img
-                                src="cafe-bibbona/imgs/menu/macaroons.png"
-                                width="700"
-                                height="620"
-                                class="img-fluid mx-auto d-block"
-                                alt="Macaroons"
-                              />
-                            </div>
-                            <!-- Menu Main List Image -->
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.Single Menu List -->
-                      <!-- /Menu List 05 -->
-
-                      <!-- Menu List 06 -->
-                      <!-- Single Menu List -->
-                      <div class="single-menu-list coffee">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <!-- Menu Item 01 -->
-                            <div class="menu-list-item">
-                              <h5>Coconut Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 01 -->
-
-                            <!-- Menu Item 02 -->
-                            <div class="menu-list-item">
-                              <h5>French Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 02 -->
-
-                            <!-- Menu Item 03 -->
-                            <div class="menu-list-item">
-                              <h5>Almond Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 03 -->
-
-                            <!-- Menu Item 04 -->
-                            <div class="menu-list-item">
-                              <h5>Chocolate Cake</h5>
-                              <div class="row">
-                                <div class="col-8">
-                                  <p class="item-description">
-                                    Contain eggs, brown sugar, vanilla, coconut, milk. Dipped in milk hazelnut
-                                    chocolate.
-                                  </p>
-                                </div>
-                                <div class="col-4">
-                                  <p class="price">£ 4.00</p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /. Menu Item 04 -->
-                          </div>
-                          <div class="col-md-6 align-self-center">
-                            <!-- Menu Main List Image -->
-                            <div class="menu-image">
-                              <img
-                                src="cafe-bibbona/imgs/menu/macaroons.png"
-                                width="700"
-                                height="620"
-                                class="img-fluid mx-auto d-block"
-                                alt="Macaroons"
-                              />
-                            </div>
-                            <!-- Menu Main List Image -->
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.Single Menu List -->
-                      <!-- /Menu List 06 -->
-                    </div>
-                  </div>
-                  <!-- /.Menu Lists -->
-                </div>
-                <!-- /.Menu Items -->
               </div>
-              <!-- /.Menu Content -->
             </div>
           </div>
         </div>
       </div>
     </section>
+    <!-- /.Events List -->
   </div>
 </template>
 
@@ -588,6 +118,13 @@ export default {
         this.events = response.data;
         console.log("All Events", this.events);
       });
+    },
+    isLoggedin: function() {
+      if (localStorage.getItem("jwt")) {
+        return true;
+      } else {
+        return false;
+      }
     },
     showEvent: function(event) {
       document.querySelector("#event-details").showModal();

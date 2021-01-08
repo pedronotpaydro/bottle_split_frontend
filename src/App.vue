@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- Header Home Page -->
+    <!-- Header Home Page
     <header id="home_header">
       <div class="container">
         <div class="row">
@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-    </header>
+    </header> -->
     <!-- Navigation -->
     <div class="fixed-top">
       <nav id="main_nav" class="navbar navbar-expand-lg navbar-light">
