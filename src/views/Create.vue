@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-md-8 offset-md-2">
             <div class="align-self-center">
-              <div class="logo-badge">
+              <!-- <div class="logo-badge">
                 <img
                   src="cafe-bibbona/imgs/logo-badge/cafe-bibbona-badge.svg"
                   width="300"
@@ -13,7 +13,7 @@
                   class="img-fluid mx-auto d-block"
                   alt="Café Bibbona - Coffee & Bakes"
                 />
-              </div>
+              </div> -->
               <h1>Upcoming Events</h1>
             </div>
           </div>
@@ -38,6 +38,50 @@
               <div class="contact_form">
                 <form class="needs-validation" novalidate>
                   <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                      <label for="validationCustom03">Event name</label>
+                      <input
+                        v-model="newEventName"
+                        type="Event name"
+                        class="form-control"
+                        id="validationCustom03"
+                        placeholder="Event name"
+                        required
+                      />
+                      <div class="invalid-feedback">
+                        Please provide a valid Event name.
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="validationCustom04">Event Date</label>
+
+                      <Datepicker format="YYYY-MM-DD h:i:s" width="100%" v-model="newEventDate" />
+                      <div class="invalid-feedback">
+                        Please provide a valid Event Date.
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="validationCustom04">Event Location</label>
+                      <!-- <input
+                        v-model="newEventLocation"
+                        type="textarea"
+                        class="form-control"
+                        id="validationCustom04"
+                        placeholder="Event Location"
+                        required
+                      /> -->
+                      <textarea
+                        placeholder="Event Location"
+                        class="form-control"
+                        v-model="newEventLocation"
+                        id="exampleFormControlTextarea1"
+                        rows="2"
+                        required
+                      ></textarea>
+                      <div class="invalid-feedback">
+                        Please provide a valid Event Location.
+                      </div>
+                    </div>
                     <div class="col-md-6 mb-3">
                       <label for="validationCustom01">Bottle Name</label>
                       <input
@@ -68,14 +112,22 @@
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="validationCustom02">Bottle Description</label>
-                      <input
+                      <!-- <input
                         v-model="newBeerDescription"
                         type="text"
                         class="form-control"
                         id="validationCustom02"
                         placeholder="Description"
                         required
-                      />
+                      /> -->
+                      <textarea
+                        placeholder="Description"
+                        class="form-control"
+                        v-model="newBeerDescription"
+                        id="exampleFormControlTextarea1"
+                        rows="2"
+                        required
+                      ></textarea>
                       <div class="invalid-feedback">
                         Please provide Description.
                       </div>
@@ -95,50 +147,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                      <label for="validationCustom03">Event name</label>
-                      <input
-                        v-model="newEventName"
-                        type="Event name"
-                        class="form-control"
-                        id="validationCustom03"
-                        placeholder="Event name"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Please provide a valid Event name.
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label for="validationCustom04">Event Location</label>
-                      <input
-                        v-model="newEventLocation"
-                        type="text"
-                        class="form-control"
-                        id="validationCustom04"
-                        placeholder="Event Location"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Please provide a valid Event Location.
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label for="validationCustom04">Event Date</label>
-                      <input
-                        v-model="newEventDate"
-                        type="text"
-                        class="form-control"
-                        id="validationCustom04"
-                        placeholder="Event Date"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Please provide a valid Event Date.
-                      </div>
-                    </div>
-                  </div>
+                  <div class="form-row"></div>
 
                   <!-- <div class="form-row">
                     <div class="col-sm-12">
@@ -204,7 +213,6 @@ export default {
     };
   },
   components: {
-    // eslint-disable-next-line vue/no-unused-components
     Datepicker,
   },
   // created: function() {

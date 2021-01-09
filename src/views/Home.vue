@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-md-8 offset-md-2">
             <div class="align-self-center">
-              <div class="logo-badge">
+              <!-- <div class="logo-badge">
                 <img
                   src="cafe-bibbona/imgs/logo-badge/cafe-bibbona-badge.svg"
                   width="300"
@@ -14,14 +14,21 @@
                   class="img-fluid mx-auto d-block"
                   alt="Café Bibbona - Coffee & Bakes"
                 />
-              </div>
-              <h1>Upcoming Events</h1>
+              </div> -->
             </div>
           </div>
         </div>
       </div>
     </header>
     <!-- /.Event Header -->
+    <section id="menu01">
+      <div class="menu_wrap">
+        <div class="menu_title">
+          <h2>Upcoming Events</h2>
+          <hr class="dotted_divider_center_red" />
+        </div>
+      </div>
+    </section>
     <!-- Events List -->
     <section id="events_list">
       <div class="container-fluid">
@@ -63,7 +70,7 @@
                         Menu:
                         {{ currentEvent.beer }}
                       </p>
-                      <p>{{ currentEvent.beer_description }}></p>
+                      <p>{{ currentEvent.beer_description }}</p>
                       <div v-if="$parent.getUserId() == currentEvent.user_id">
                         <button v-on:click="updateEvent(currentEvent)">Update</button>
                         <button v-on:click="destroyEvent(currentEvent)">Delete</button>
@@ -78,10 +85,9 @@
                   <div class="event_img">
                     <img
                       class="img-fluid mx-auto d-block"
-                      src="cafe-bibbona/imgs/events/event-01.jpg"
+                      v-bind:src="`${event.beer_image}`"
                       width="784"
                       height="600"
-                      alt=""
                     />
                   </div>
                 </div>

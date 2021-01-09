@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-md-8 offset-md-2">
             <div class="align-self-center">
-              <div class="logo-badge">
+              <!-- <div class="logo-badge">
                 <img
                   src="cafe-bibbona/imgs/logo-badge/cafe-bibbona-badge.svg"
                   width="300"
@@ -14,7 +14,7 @@
                   class="img-fluid mx-auto d-block"
                   alt="Café Bibbona - Coffee & Bakes"
                 />
-              </div>
+              </div> -->
               <h1>My Events</h1>
             </div>
           </div>
@@ -78,10 +78,9 @@
                   <div class="event_img">
                     <img
                       class="img-fluid mx-auto d-block"
-                      src="cafe-bibbona/imgs/events/event-01.jpg"
+                      v-bind:src="`${event.beer_image}`"
                       width="784"
                       height="600"
-                      alt=""
                     />
                   </div>
                 </div>
