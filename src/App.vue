@@ -1,24 +1,5 @@
 <template>
   <div id="app">
-    <!-- Header Home Page
-    <header id="home_header">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 offset-md-2">
-            <div class="logo-badge">
-              <img
-                src="cafe-bibbona/imgs/logo-badge/cafe-bibbona-badge.svg"
-                width="300"
-                height="115"
-                class="img-fluid mx-auto d-block"
-                alt="Café Bibbona - Coffee & Bakes"
-              />
-            </div>
-            <h1>Bottle Split - Share your favorite beers</h1>
-          </div>
-        </div>
-      </div>
-    </header> -->
     <!-- Navigation -->
     <div class="fixed-top">
       <nav id="main_nav" class="navbar navbar-expand-lg navbar-light">
@@ -38,25 +19,25 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link " href="/">Home</a>
+                <a class="nav-link " href="/#upcoming">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " v-if="isLoggedin()" href="/create">Create an event</a>
+                <a class="nav-link " v-if="isLoggedin()" href="/create#create">Create an event</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " v-if="isLoggedin()" href="/events">All Events</a>
+                <a class="nav-link " v-if="isLoggedin()" href="/events#all">All Events</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" v-if="isLoggedin()" href="/myevents">My Events</a>
+                <a class="nav-link" v-if="isLoggedin()" href="/myevents#my_events">My Events</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" v-if="!isLoggedin()" href="/signup">Signup</a>
+                <a class="nav-link" v-if="!isLoggedin()" href="/signup#signup">Signup</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" v-if="!isLoggedin()" href="/login">Login</a>
+                <a class="nav-link" v-if="!isLoggedin()" href="/login#login">Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" v-if="isLoggedin()" href="/logout">Logout</a>
+                <a class="nav-link" v-if="isLoggedin()" href="/logout#logout">Logout</a>
               </li>
             </ul>
           </div>

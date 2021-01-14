@@ -15,13 +15,23 @@
                   alt="Café Bibbona - Coffee & Bakes"
                 />
               </div> -->
-              <h1>All Events</h1>
             </div>
           </div>
         </div>
       </div>
     </header>
+    <a id="all"></a>
+
     <!-- /.Event Header -->
+    <section class="" id="menu01">
+      <div class="menu_wrap">
+        <div class="menu_title ">
+          <h2>All Events</h2>
+          <hr class="dotted_divider_center_red" />
+        </div>
+      </div>
+    </section>
+
     <!-- Events List -->
     <section id="events_list">
       <div class="container-fluid">
@@ -33,15 +43,27 @@
                   <div class="card_content">
                     <h2>{{ event.name }}</h2>
                     <span>
-                      <small>Hosted by: {{ event.hosted_by }}</small>
+                      <small>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-person-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                          &emsp;
+                        </svg>
+                        <a href="url">{{ event.hosted_by }}</a>
+                      </small>
                     </span>
-                    <hr class="dotted_divider_left_red" />
+                    <hr class="dotted_divider_center_red" />
                     <p>{{ event.beer_description }}</p>
 
-                    <a class="btn btn-link-bibbona-sm" v-on:click="showEvent(event)">
+                    <button class="btn-full-bibbona-sm" v-on:click="showEvent(event)">
                       More info
-                      <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i>
-                    </a>
+                    </button>
                   </div>
                   <dialog id="event-details">
                     <form method="dialog">

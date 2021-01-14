@@ -9214,7 +9214,7 @@ header {
 #menu01 {
   margin-top: 20;
   background: #f9fcff;
-  padding: 150px 0px 100px;
+  padding: 75px 0px 100px;
   /*********
   Small Mobile
   *********/
@@ -10998,17 +10998,17 @@ fieldset[disabled] a.btn {
 }
 
 .btn-full-bibbona-sm {
-  color: #fff;
-  background-color: #ea4661;
+  color: rgb(0, 0, 0);
+  background-color: #e8a921;
   text-transform: uppercase;
   font-weight: 500;
   font-size: small;
   letter-spacing: 2px;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 0.5rem;
 }
 .btn-full-bibbona-sm:hover {
   color: #fff;
-  background-color: #cc1735;
+  background-color: #e89c19;
   border-color: #cc1735;
 }
 .btn-full-bibbona-sm:focus,
@@ -11896,5 +11896,66 @@ input[type="button"].btn-block {
 .owl-theme .owl-dots .owl-dot:hover span {
   background: #869791;
 }
+
+/* WUT */
+#summary {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#summary p.collapse:not(.show) {
+    height: 42px !important;
+    overflow: hidden;
+  
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+}
+
+#summary p.collapsing {
+    min-height: 42px !important;
+}
+
+#summary a.collapsed:after  {
+    content: '+ Read More';
+}
+
+#summary a:not(.collapsed):after {
+    content: '- Read Less';
+}
+
+/* .read {
+  overflow: hidden;
+  font-size: 16px !important;
+  transition: all 0.3s;
+  margin-bottom: 10px;
+}
+.read-less {
+  height: 90px !important;
+} */
+
+/* #module {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+
+#module #collapseExample.collapse:not(.show) {
+  display: block;
+  height: 3rem;
+  overflow: hidden;
+}
+
+#module #collapseExample.collapsing {
+  height: 3rem;
+}
+
+#module a.collapsed::after {
+  content: '+ Show More';
+}
+
+#module a:not(.collapsed)::after {
+  content: '- Show Less';
+} */
 
 /*# sourceMappingURL=bibbona.css.map */

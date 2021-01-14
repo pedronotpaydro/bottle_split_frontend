@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 offset-md-2">
-            <div class="align-self-center">
+            <div class="align-self-center" id="create">
               <!-- <div class="logo-badge">
                 <img
                   src="cafe-bibbona/imgs/logo-badge/cafe-bibbona-badge.svg"
@@ -14,7 +14,6 @@
                   alt="Café Bibbona - Coffee & Bakes"
                 />
               </div> -->
-              <h1>Upcoming Events</h1>
             </div>
           </div>
         </div>
@@ -82,6 +81,10 @@
                         Please provide a valid Event Location.
                       </div>
                     </div>
+                    <div class="w-100">
+                      <hr class="dotted_divider_center_red" />
+                    </div>
+
                     <div class="col-md-6 mb-3">
                       <label for="validationCustom01">Bottle Name</label>
                       <input
@@ -94,6 +97,20 @@
                       />
                       <div class="invalid-feedback">
                         Please provide name of bottle.
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="validationCustom02">Brewery</label>
+                      <input
+                        type="text"
+                        v-model="newBeerBrewery"
+                        class="form-control"
+                        id="validationCustom02"
+                        placeholder="Brewery"
+                        required
+                      />
+                      <div class="invalid-feedback">
+                        Please provide Brewery.
                       </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -110,6 +127,7 @@
                         Please provide Style.
                       </div>
                     </div>
+
                     <div class="col-md-6 mb-3">
                       <label for="validationCustom02">Bottle Description</label>
                       <!-- <input
@@ -132,20 +150,6 @@
                         Please provide Description.
                       </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                      <label for="validationCustom02">Brewery</label>
-                      <input
-                        type="text"
-                        v-model="newBeerBrewery"
-                        class="form-control"
-                        id="validationCustom02"
-                        placeholder="Brewery"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Please provide Brewery.
-                      </div>
-                    </div>
                   </div>
                   <div class="form-row"></div>
 
@@ -160,7 +164,7 @@
                   <div class="form-row"></div>
                 </form>
                 <div class="col-sm-12 text-center">
-                  <button class="btn btn-full-bibbona-sm" v-on:click="createBeer">Create Event</button>
+                  <button class="btn-full-bibbona-sm" v-on:click="createBeer">Create Event</button>
                 </div>
               </div>
 
@@ -243,9 +247,10 @@ export default {
       axios.post("/api/beers", beerParams).then(response => {
         console.log("Beer added", response.data);
         this.beers.push(response.data);
-        axios.post("/api/events", eventParams).then(console.log("event added"));
-        this.$parent.flashMessage = "Event Created Successfully!";
-        this.$router.push("/");
+        axios
+          .post("/api/events", eventParams)
+          .then(console.log("event added"))
+          .then(this.$router.push("/#home"));
       });
     },
   },

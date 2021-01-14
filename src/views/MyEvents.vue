@@ -15,33 +15,53 @@
                   alt="Café Bibbona - Coffee & Bakes"
                 />
               </div> -->
-              <h1>My Events</h1>
             </div>
           </div>
         </div>
       </div>
     </header>
+    <a id="my_events"></a>
     <!-- /.Event Header -->
+    <section class="" id="menu01">
+      <div class="menu_wrap">
+        <div class="menu_title ">
+          <h2>My Events</h2>
+          <hr class="dotted_divider_center_red" />
+        </div>
+      </div>
+    </section>
     <!-- Events List -->
     <section id="events_list">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6" v-for="event in events" :key="event.id">
-            <div class="event_card">
+            <div class="event_card h-100">
               <div class="row no-padding">
                 <div class="col-md-12 no-padding">
                   <div class="card_content">
                     <h2>{{ event.name }}</h2>
                     <span>
-                      <small>Hosted by: {{ event.hosted_by }}</small>
+                      <small>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-person-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                          &emsp;
+                        </svg>
+                        <a href="url">{{ event.hosted_by }}</a>
+                      </small>
                     </span>
                     <hr class="dotted_divider_left_red" />
                     <p>{{ event.beer_description }}</p>
 
-                    <a class="btn btn-link-bibbona-sm" v-on:click="showEvent(event)">
+                    <button class="btn-full-bibbona-sm" v-on:click="showEvent(event)">
                       More info
-                      <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i>
-                    </a>
+                    </button>
                   </div>
                   <dialog id="event-details">
                     <form method="dialog">
@@ -63,7 +83,7 @@
                         Menu:
                         {{ currentEvent.beer }}
                       </p>
-                      <p>{{ currentEvent.beer_description }}></p>
+                      <p>{{ currentEvent.beer_description }}</p>
                       <div v-if="$parent.getUserId() == currentEvent.user_id">
                         <button v-on:click="updateEvent(currentEvent)">Update</button>
                         <button v-on:click="destroyEvent(currentEvent)">Delete</button>
@@ -85,6 +105,9 @@
                   </div>
                 </div>
               </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated {{ event.ago }} ago</small>
+              </div>
             </div>
           </div>
         </div>
@@ -101,14 +124,14 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: "Bottle Split!",
+      message: "",
       events: [],
       currentEvent: {},
 
       errors: [],
     };
   },
-  mounted: function() {
+  created: function() {
     this.indexEvents();
   },
   methods: {
