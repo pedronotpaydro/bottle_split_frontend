@@ -23,7 +23,9 @@
     <section id="contact_us">
       <div class="container">
         <div class="row">
-          <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-10 offset-md-1 col-sm-12">
+          <div
+            class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-md-10 offset-md-1 col-sm-12"
+          >
             <div class="contact_info_card">
               <!-- Title -->
               <div class="contact_title">
@@ -54,7 +56,11 @@
                     <div class="col-md-6 mb-3">
                       <label for="validationCustom04">Event Date</label>
 
-                      <Datepicker format="YYYY-MM-DD h:i:s" width="100%" v-model="newEventDate" />
+                      <Datepicker
+                        format="YYYY-MM-DD h:i:s"
+                        width="100%"
+                        v-model="newEventDate"
+                      />
                       <div class="invalid-feedback">
                         Please provide a valid Event Date.
                       </div>
@@ -164,7 +170,9 @@
                   <div class="form-row"></div>
                 </form>
                 <div class="col-sm-12 text-center">
-                  <button class="btn-full-bibbona-sm" v-on:click="createBeer">Create Event</button>
+                  <button class="btn-full-bibbona-sm" v-on:click="createEvent">
+                    Create Event
+                  </button>
                 </div>
               </div>
 
@@ -223,16 +231,16 @@ export default {
   //   this.indexBeers();
   // },
   mounted: function() {
-    this.indexBeers();
+    // this.indexBeers();
   },
   methods: {
-    indexBeers: function() {
-      axios.get("/api/beers").then(response => {
-        this.beers = response.data;
-        console.log("All Beers", this.beers);
-      });
-    },
-    createBeer: function() {
+    // indexBeers: function() {
+    //   axios.get("/api/beers").then((response) => {
+    //     this.beers = response.data;
+    //     console.log("All Beers", this.beers);
+    //   });
+    // },
+    createEvent: function() {
       var beerParams = {
         name: this.newBeerName,
         brewery: this.newBeerBrewery,
@@ -244,14 +252,17 @@ export default {
         location: this.newEventLocation,
         date: this.newEventDate,
       };
-      axios.post("/api/beers", beerParams).then(response => {
-        console.log("Beer added", response.data);
-        this.beers.push(response.data);
-        axios
-          .post("/api/events", eventParams)
-          .then(console.log("event added"))
-          .then(this.$router.push("/#home"));
-      });
+      axios
+        .post("/api/beers", beerParams)
+        .then(response => {
+          console.log("beer added", response.data);
+        })
+        .then(
+          axios.post("/api/events", eventParams).then(response => {
+            console.log("event added", response.data);
+          })
+        )
+        .then(this.$router.push("/"));
     },
   },
 };
